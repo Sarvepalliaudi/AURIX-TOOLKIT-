@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encryption/Decryption Tool | Aurix</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='aurix.css') }}" rel="stylesheet">
+</head>
+<body class="aurix-bg">
+    <div class="container mt-5">
+        <h2 class="aurix-title text-center">Encryption/Decryption Tool</h2>
+        <form method="post" class="mt-4">
+            <div class="mb-3">
+                <label for="text" class="form-label">Text</label>
+                <input type="text" class="form-control" id="text" name="text" value="{{ text|default('') }}" required title="Enter the text to encrypt or decrypt">
+            </div>
+            <div class="mb-3">
+                <label for="key" class="form-label">Key (16 chars max)</label>
+                <input type="text" class="form-control" id="key" name="key" value="{{ key|default('') }}" maxlength="16" required title="Enter a 16-character key">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Mode</label>
+                <select class="form-select" name="mode" title="Select encryption or decryption mode">
+                    <option value="encrypt" {% if mode == 'encrypt' %}selected{% endif %}>Encrypt</option>
+                    <option value="decrypt" {% if mode == 'decrypt' %}selected{% endif %}>Decrypt</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary aurix-tool">Go</button>
+            <a href="/" class="btn btn-secondary ms-2">Back to Home</a>
+        </form>
+        {% if result %}
+            {% if 'Error:' in result %}
+                <div class="alert alert-danger mt-4">
+                    <strong>Error:</strong> <span class="aurix-break">{{ result }}</span>
+                </div>
+            {% else %}
+                <div class="alert alert-info mt-4">
+                    <strong>Result:</strong> <span class="aurix-break">{{ result }}</span>
+                </div>
+            {% endif %}
+        {% endif %}
+        <div class="alert alert-warning mt-4">
+            <strong>Tip:</strong> Use a 16-character key for best results. For decryption, use the exact key and encrypted text from a previous encryption.
+        </div>
+    </div>
+</body>
+</html>

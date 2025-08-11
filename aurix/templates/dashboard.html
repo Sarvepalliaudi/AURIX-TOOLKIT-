@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aurix Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='aurix.css') }}" rel="stylesheet">
+</head>
+<body class="aurix-bg">
+    <div class="container mt-5">
+        <div class="d-flex align-items-center mb-4">
+            <img src="{{ url_for('static', filename='aurix_logo.svg') }}" alt="Aurix Logo" class="aurix-logo">
+            <h1 class="aurix-title ms-3">Aurix Cybersecurity Toolkit</h1>
+        </div>
+        <div class="card p-4 mb-4 shadow-lg">
+            <h3>Welcome to Aurix!</h3>
+            <p>This is your all-in-one, modern cybersecurity toolkit. Select a tool from the menu or explore the dashboard for quick access and help.</p>
+            <a href="/" class="btn btn-primary aurix-tool">Go to Toolkit</a>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-6">
+                <div class="card p-3 h-100 aurix-tool-card">
+                    <h5>Password Strength Checker</h5>
+                    <p>Test the strength of your passwords and get tips for improvement.</p>
+                    <a href="/password-strength" class="btn btn-outline-light">Try Now</a>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card p-3 h-100 aurix-tool-card">
+                    <h5>File Integrity Checker</h5>
+                    <p>Verify file integrity using secure hash algorithms.</p>
+                    <a href="/file-integrity" class="btn btn-outline-light">Try Now</a>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card p-3 h-100 aurix-tool-card">
+                    <h5>Port Scanner</h5>
+                    <p>Scan open ports on any host or IP address.</p>
+                    <a href="/port-scanner" class="btn btn-outline-light">Try Now</a>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card p-3 h-100 aurix-tool-card">
+                    <h5>Encryption/Decryption Tool</h5>
+                    <p>Encrypt or decrypt text using strong AES encryption.</p>
+                    <a href="/encryption-tool" class="btn btn-outline-light">Try Now</a>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card p-3 h-100 aurix-tool-card">
+                    <h5>ZIP Password Cracker</h5>
+                    <p>Attempt to recover lost ZIP file passwords with a wordlist.</p>
+                    <a href="/zip-cracker" class="btn btn-outline-light">Try Now</a>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card p-3 h-100 aurix-tool-card">
+                    <h5>Network Packet Sniffer</h5>
+                    <p>Capture and analyze network packets in real time.</p>
+                    <a href="/packet-sniffer" class="btn btn-outline-light">Try Now</a>
+                </div>
+            </div>
+        </div>
+        <footer class="mt-5 text-center text-light">
+            <hr class="aurix-hr">
+            <p>Aurix &copy; 2025. Crafted for security and usability.</p>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Port Scanner | Aurix</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='aurix.css') }}" rel="stylesheet">
+</head>
+<body class="aurix-bg">
+    <div class="container mt-5">
+        <h2 class="aurix-title text-center">Port Scanner</h2>
+        <form method="post" class="mt-4">
+            <div class="mb-3">
+                <label for="target" class="form-label">Target IP or Hostname</label>
+                <input type="text" class="form-control" id="target" name="target" value="{{ target }}" required>
+            </div>
+            <div class="mb-3">
+                <label for="ports" class="form-label">Ports (e.g. 80,443 or 20-25)</label>
+                <input type="text" class="form-control" id="ports" name="ports" value="{{ ports }}" required>
+            </div>
+            <button type="submit" class="btn btn-primary aurix-tool">Scan</button>
+            <a href="/" class="btn btn-secondary ms-2">Back to Home</a>
+        </form>
+        {% if result is not none %}
+        <div class="alert mt-4 {{ 'alert-success' if result and result != 'Error' else 'alert-danger' }}">
+            {% if result == [] %}
+                <strong>No open ports found.</strong>
+            {% elif result is string and result.startswith('Error') %}
+                <strong>{{ result }}</strong>
+            {% else %}
+                <strong>Open Ports:</strong> {{ result|join(', ') }}
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>

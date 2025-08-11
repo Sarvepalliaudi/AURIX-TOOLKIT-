@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Network Packet Sniffer | Aurix</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='aurix.css') }}" rel="stylesheet">
+</head>
+<body class="aurix-bg">
+    <div class="container mt-5">
+        <h2 class="aurix-title text-center">Network Packet Sniffer</h2>
+        <form method="post" class="mt-4">
+            <div class="mb-3">
+                <label for="count" class="form-label">Number of Packets to Capture</label>
+                <input type="number" class="form-control" id="count" name="count" value="{{ count }}" min="1" max="100">
+            </div>
+            <button type="submit" class="btn btn-primary aurix-tool">Start Sniffing</button>
+            <a href="/" class="btn btn-secondary ms-2">Back to Home</a>
+        </form>
+        {% if result %}
+        <div class="alert alert-info mt-4">
+            <strong>Captured Packets:</strong>
+            {% if result|length > 0 %}
+<ul>
+    {% for pkt in result %}
+        <li>{{ pkt }}</li>
+    {% endfor %}
+</ul>
+            {% else %}
+<ul><li>No packets captured.</li></ul>
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>

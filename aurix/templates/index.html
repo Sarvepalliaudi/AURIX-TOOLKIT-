@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aurix Cybersecurity Toolkit</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='aurix.css') }}" rel="stylesheet">
+</head>
+<body class="aurix-bg">
+    <div class="container mt-5">
+        <div class="d-flex align-items-center mb-4 justify-content-center">
+            <img src="{{ url_for('static', filename='aurix_logo.svg') }}" alt="Aurix Logo" class="aurix-logo">
+            <h1 class="aurix-title ms-3">Aurix Cybersecurity Toolkit</h1>
+        </div>
+        <div class="text-center mb-3">
+            <a href="/dashboard" class="btn btn-outline-light aurix-tool">Go to Dashboard</a>
+        </div>
+        <p class="text-center">Select a tool to get started:</p>
+        <div class="list-group">
+            <a href="{{ url_for('password_strength') }}" class="list-group-item list-group-item-action aurix-tool">Password Strength Checker</a>
+            <a href="{{ url_for('file_integrity') }}" class="list-group-item list-group-item-action aurix-tool">File Integrity Checker</a>
+            <a href="{{ url_for('port_scanner') }}" class="list-group-item list-group-item-action aurix-tool">Port Scanner</a>
+            <a href="{{ url_for('encryption_tool') }}" class="list-group-item list-group-item-action aurix-tool">Encryption/Decryption Tool</a>
+            <a href="{{ url_for('zip_cracker') }}" class="list-group-item list-group-item-action aurix-tool">ZIP Password Cracker</a>
+            <a href="{{ url_for('packet_sniffer') }}" class="list-group-item list-group-item-action aurix-tool">Network Packet Sniffer</a>
+        </div>
+    </div>
+</body>
+</html>
