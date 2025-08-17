@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: cyber-security-toolkit
+    name: app
     env: python
     buildCommand: ""
     startCommand: "gunicorn app:app"
