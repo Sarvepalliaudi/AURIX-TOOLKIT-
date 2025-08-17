@@ -1,4 +1,3 @@
-
 # =============================
 # 1. IMPORTS & FLASK APP SETUP
 # =============================
@@ -15,6 +14,12 @@ from werkzeug.utils import secure_filename
 from scapy.all import sniff, IP, TCP, UDP
 
 app = Flask(__name__)
+
+# Create an 'uploads' directory if it doesn't exist
+UPLOAD_FOLDER = os.path.join(os.getcwd(), 'uploads')
+if not os.path.exists(UPLOAD_FOLDER):
+    os.makedirs(UPLOAD_FOLDER)
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 # =============================
 # 0. MAIN MENU, DASHBOARD, AND TOOL ROUTES
@@ -49,18 +54,20 @@ def password_strength():
 def file_integrity():
     hash_value = None
     algo = 'sha256'
+    filename = None
     if request.method == 'POST':
         file = request.files.get('file')
         algo = request.form.get('algo', 'sha256')
         if file:
             data = file.read()
+            filename = file.filename
             if algo == 'md5':
                 hash_value = hashlib.md5(data).hexdigest()
             elif algo == 'sha1':
                 hash_value = hashlib.sha1(data).hexdigest()
             else:
                 hash_value = hashlib.sha256(data).hexdigest()
-    return render_template('file_integrity.html', hash_value=hash_value, algo=algo)
+    return render_template('file_integrity.html', hash_value=hash_value, algo=algo, filename=filename)
 
 @app.route('/port-scanner', methods=['GET', 'POST'])
 def port_scanner():
@@ -142,6 +149,10 @@ def zip_cracker():
                         result = "Password not found in wordlist."
             except Exception as e:
                 result = f"Error: {e}"
+            finally:
+                # Clean up the uploaded file
+                if os.path.exists(filepath):
+                    os.remove(filepath)
     return render_template('zip_cracker.html', result=result, filename=filename)
 
 # =============================
